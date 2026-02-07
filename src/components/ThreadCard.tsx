@@ -18,12 +18,20 @@ interface ThreadCardProps {
         createdAt?: string;
         hashtags?: string;
         ipns?: string;
+        upvotes?: number;
+        downvotes?: number;
     };
     idx: number;
 }
 
 export const ThreadCard: React.FC<ThreadCardProps> = ({ thread, idx }) => {
     const router = useRouter();
+    const [votes, setVotes] = React.useState({
+        up: thread.upvotes || 0,
+        down: thread.downvotes || 0
+    });
+    const [isVoting, setIsVoting] = React.useState(false);
+
     let tags: string[] = [];
     if (thread.hashtags) {
         try {
@@ -36,6 +44,27 @@ export const ThreadCard: React.FC<ThreadCardProps> = ({ thread, idx }) => {
     const ipnsValue = thread.ipns
         ? (thread.ipns.startsWith('http') ? thread.ipns : `ipns://${thread.ipns}`)
         : '';
+
+    const handleVote = async (e: React.MouseEvent, direction: 'up' | 'down') => {
+        e.stopPropagation();
+        if (isVoting) return;
+        setIsVoting(true);
+        try {
+            const res = await fetch(`/api/threads/${thread.id}/vote`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ direction }),
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setVotes({ up: data.upvotes, down: data.downvotes });
+            }
+        } catch (error) {
+            console.error('Failed to vote:', error);
+        } finally {
+            setIsVoting(false);
+        }
+    };
 
     return (
         <motion.div
@@ -67,9 +96,30 @@ export const ThreadCard: React.FC<ThreadCardProps> = ({ thread, idx }) => {
             </div>
 
             <div className="pt-4 space-y-2 flex-grow">
-                <h3 className="text-lg font-black text-metamask-purple line-clamp-2 leading-snug group-hover:text-metamask-orange transition-colors">
-                    {thread.title}
-                </h3>
+                <div className="flex justify-between items-start gap-2">
+                    <h3 className="text-lg font-black text-metamask-purple line-clamp-2 leading-snug group-hover:text-metamask-orange transition-colors">
+                        {thread.title}
+                    </h3>
+                    <div className="flex flex-col items-center gap-1 bg-metamask-beige/50 p-1.5 rounded-xl min-w-[40px]">
+                        <button
+                            onClick={(e) => handleVote(e, 'up')}
+                            disabled={isVoting}
+                            className="text-metamask-purple/40 hover:text-metamask-orange transition-colors"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6" /></svg>
+                        </button>
+                        <span className="text-xs font-black text-metamask-purple">
+                            {(votes.up - votes.down)}
+                        </span>
+                        <button
+                            onClick={(e) => handleVote(e, 'down')}
+                            disabled={isVoting}
+                            className="text-metamask-purple/40 hover:text-blue-500 transition-colors"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                        </button>
+                    </div>
+                </div>
                 <div className="text-xs font-bold text-metamask-purple/50 flex flex-wrap items-center gap-2">
                     <span>{meta.viewsLabel}</span>
                     <span>•</span>
@@ -90,11 +140,6 @@ export const ThreadCard: React.FC<ThreadCardProps> = ({ thread, idx }) => {
                                 #{tag}
                             </span>
                         ))}
-                        {tags.length > 3 && (
-                            <span className="text-[10px] font-black text-metamask-purple/40 bg-gray-100 px-2 py-0.5 rounded-full">
-                                +{tags.length - 3} more
-                            </span>
-                        )}
                     </div>
                 )}
             </div>

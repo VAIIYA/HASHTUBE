@@ -24,6 +24,8 @@ interface Post {
     hashtags?: string;
     ipns?: string;
     lastReplyAt?: string;
+    upvotes?: number;
+    downvotes?: number;
 }
 
 export default function ThreadPage({ params }: { params: Promise<{ id: string }> }) {
@@ -67,6 +69,23 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
             }
         } catch (error) {
             console.error('Error fetching up next videos:', error);
+        }
+    };
+
+    const handleVote = async (direction: 'up' | 'down') => {
+        if (isSubmitting || !op) return;
+        try {
+            const res = await fetch(`/api/threads/${op.id}/vote`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ direction }),
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setOp({ ...op, upvotes: data.upvotes, downvotes: data.downvotes });
+            }
+        } catch (error) {
+            console.error('Failed to vote:', error);
         }
     };
 
@@ -153,26 +172,43 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                             animate={{ opacity: 1, y: 0 }}
                             className="bg-white p-6 rounded-[28px] pill-shadow border border-white space-y-5"
                         >
-                            <div className="space-y-2">
+                            <div className="flex justify-between items-start gap-4">
                                 <h1 className="text-3xl font-black text-metamask-purple">{op.title}</h1>
-                                <div className="flex flex-wrap items-center gap-3 text-xs font-bold text-metamask-purple/40">
-                                    <div className="flex items-center gap-1.5">
-                                        <Clock size={12} />
-                                        {new Date(op.createdAt).toLocaleString()}
-                                    </div>
-                                    <div className="flex items-center gap-1.5">
-                                        <MessageSquare size={12} />
-                                        {op.repliesCount || replies.length} comments
-                                    </div>
-                                    <div className="flex items-center gap-1.5">
-                                        <Play size={12} />
-                                        {op.type}
-                                    </div>
-                                    <div className="flex items-center gap-1.5">
-                                        <span>{meta.viewsLabel}</span>
-                                        <span>•</span>
-                                        <span>{meta.timeAgo}</span>
-                                    </div>
+                                <div className="flex items-center gap-1 bg-metamask-beige/50 p-2 rounded-2xl">
+                                    <button
+                                        onClick={() => handleVote('up')}
+                                        className="text-metamask-purple/40 hover:text-metamask-orange transition-colors"
+                                    >
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6" /></svg>
+                                    </button>
+                                    <span className="text-sm font-black text-metamask-purple min-w-[30px] text-center">
+                                        {(op.upvotes || 0) - (op.downvotes || 0)}
+                                    </span>
+                                    <button
+                                        onClick={() => handleVote('down')}
+                                        className="text-metamask-purple/40 hover:text-blue-500 transition-colors"
+                                    >
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap items-center gap-3 text-xs font-bold text-metamask-purple/40">
+                                <div className="flex items-center gap-1.5">
+                                    <Clock size={12} />
+                                    {new Date(op.createdAt).toLocaleString()}
+                                </div>
+                                <div className="flex items-center gap-1.5">
+                                    <MessageSquare size={12} />
+                                    {op.repliesCount || replies.length} comments
+                                </div>
+                                <div className="flex items-center gap-1.5">
+                                    <Play size={12} />
+                                    {op.type}
+                                </div>
+                                <div className="flex items-center gap-1.5">
+                                    <span>{meta.viewsLabel}</span>
+                                    <span>•</span>
+                                    <span>{meta.timeAgo}</span>
                                 </div>
                             </div>
 

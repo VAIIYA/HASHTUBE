@@ -123,6 +123,8 @@ async function ensureLinksColumns() {
                     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                     hashtags TEXT,
                     ipns TEXT,
+                    upvotes INTEGER DEFAULT 0,
+                    downvotes INTEGER DEFAULT 0,
                     FOREIGN KEY (parentId) REFERENCES links(id)
                 );
             `);
@@ -139,6 +141,12 @@ async function ensureLinksColumns() {
             }
             if (!existing.has('ipns')) {
                 alters.push(`ALTER TABLE links ADD COLUMN ipns TEXT;`);
+            }
+            if (!existing.has('upvotes')) {
+                alters.push(`ALTER TABLE links ADD COLUMN upvotes INTEGER DEFAULT 0;`);
+            }
+            if (!existing.has('downvotes')) {
+                alters.push(`ALTER TABLE links ADD COLUMN downvotes INTEGER DEFAULT 0;`);
             }
             for (const sql of alters){
                 await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$turso$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].execute(sql);

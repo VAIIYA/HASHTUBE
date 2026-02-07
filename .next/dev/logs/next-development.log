@@ -62,3 +62,463 @@ It can also happen if the client has a browser extension installed which messes 
 [00:07:10.796] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
 [00:07:10.809] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
 [00:07:10.820] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:34.963] Server  LOG     ✓ Compiled in 152ms
+[00:07:45.148] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.148] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.153] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.182] Server  LOG     ✓ Compiled in 69ms
+[00:07:45.286] Browser ERROR   ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+https://nextjs.org/docs/messages/module-not-found
+[00:07:45.618] Browser ERROR   ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+https://nextjs.org/docs/messages/module-not-found
+[00:07:45.619] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.624] Browser ERROR   ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+https://nextjs.org/docs/messages/module-not-found
+[00:07:45.626] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.632] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.638] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.646] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.646] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.659] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.669] Server  ERROR   ⨯ ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.782] Browser ERROR   uncaughtError: Error: ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:45.935] Browser ERROR   ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+https://nextjs.org/docs/messages/module-not-found
+[00:07:45.935] Browser ERROR   ./src/app/page.tsx:1:1
+Module not found: Can't resolve './catalog/page'
+> 1 | export { default } from './catalog/page';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export const dynamic = 'force-dynamic';
+  4 |
+
+https://nextjs.org/docs/messages/module-not-found
+[00:07:47.993] Server  LOG     ✓ Compiled in 63ms
+[00:07:48.040] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:48.183] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:48.290] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         data-jetski-tab-id="2018746783"
+                        >
+                  ...
+
+[00:07:49.966] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:08:30.555] Server  LOG     ✓ Compiled in 28ms
+[00:08:35.353] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:08:35.589] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:45.605] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:45.714] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/submit" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         data-jetski-tab-id="2018746787"
+                        >
+                  ...
+
+[00:10:17.142] Server  ERROR   Submission error: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:10:33.850] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:33.955] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/hashtags" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         data-jetski-tab-id="2018746787"
+                        >
+                  ...
+
+[00:10:34.033] Server  ERROR   Fetch hashtags error: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:10:42.438] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:10:42.548] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:42.656] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         data-jetski-tab-id="2018746787"
+                        >
+                  ...
+
+[00:10:52.830] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:52.983] Server  ERROR   Search error: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:10:52.985] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/search" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         data-jetski-tab-id="2018746787"
+                        >
+                  ...
+
+[00:11:02.058] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:02.183] Server  ERROR   Search error: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:11:02.204] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/search" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         data-jetski-tab-id="2018746787"
+                        >
+                  ...
+
+[00:11:09.214] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:11:09.325] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:09.452] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         data-jetski-tab-id="2018746787"
+                        >
+                  ...
+

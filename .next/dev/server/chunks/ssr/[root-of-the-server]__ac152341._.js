@@ -379,6 +379,7 @@ __turbopack_context__.s([
     ()=>ThreadCard
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/message-square.js [app-ssr] (ecmascript) <export default as MessageSquare>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$clock$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Clock$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/clock.js [app-ssr] (ecmascript) <export default as Clock>");
@@ -393,8 +394,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$threadMeta$2e$
 ;
 ;
 ;
+;
 const ThreadCard = ({ thread, idx })=>{
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
+    const [votes, setVotes] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].useState({
+        up: thread.upvotes || 0,
+        down: thread.downvotes || 0
+    });
+    const [isVoting, setIsVoting] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].useState(false);
     let tags = [];
     if (thread.hashtags) {
         try {
@@ -405,6 +412,33 @@ const ThreadCard = ({ thread, idx })=>{
     }
     const meta = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$threadMeta$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getThreadMeta"])(thread);
     const ipnsValue = thread.ipns ? thread.ipns.startsWith('http') ? thread.ipns : `ipns://${thread.ipns}` : '';
+    const handleVote = async (e, direction)=>{
+        e.stopPropagation();
+        if (isVoting) return;
+        setIsVoting(true);
+        try {
+            const res = await fetch(`/api/threads/${thread.id}/vote`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    direction
+                })
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setVotes({
+                    up: data.upvotes,
+                    down: data.downvotes
+                });
+            }
+        } catch (error) {
+            console.error('Failed to vote:', error);
+        } finally{
+            setIsVoting(false);
+        }
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
         initial: {
             opacity: 0,
@@ -432,7 +466,7 @@ const ThreadCard = ({ thread, idx })=>{
                         showPlayIcon: true
                     }, void 0, false, {
                         fileName: "[project]/src/components/ThreadCard.tsx",
-                        lineNumber: 49,
+                        lineNumber: 78,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -440,7 +474,7 @@ const ThreadCard = ({ thread, idx })=>{
                         children: meta.durationLabel
                     }, void 0, false, {
                         fileName: "[project]/src/components/ThreadCard.tsx",
-                        lineNumber: 54,
+                        lineNumber: 83,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -451,7 +485,7 @@ const ThreadCard = ({ thread, idx })=>{
                                 children: thread.type
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 58,
+                                lineNumber: 87,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             thread.ipns && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -459,30 +493,116 @@ const ThreadCard = ({ thread, idx })=>{
                                 children: "IPNS"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 62,
+                                lineNumber: 91,
                                 columnNumber: 25
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/ThreadCard.tsx",
-                        lineNumber: 57,
+                        lineNumber: 86,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ThreadCard.tsx",
-                lineNumber: 48,
+                lineNumber: 77,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "pt-4 space-y-2 flex-grow",
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                        className: "text-lg font-black text-metamask-purple line-clamp-2 leading-snug group-hover:text-metamask-orange transition-colors",
-                        children: thread.title
-                    }, void 0, false, {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex justify-between items-start gap-2",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                className: "text-lg font-black text-metamask-purple line-clamp-2 leading-snug group-hover:text-metamask-orange transition-colors",
+                                children: thread.title
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ThreadCard.tsx",
+                                lineNumber: 100,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex flex-col items-center gap-1 bg-metamask-beige/50 p-1.5 rounded-xl min-w-[40px]",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: (e)=>handleVote(e, 'up'),
+                                        disabled: isVoting,
+                                        className: "text-metamask-purple/40 hover:text-metamask-orange transition-colors",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            width: "18",
+                                            height: "18",
+                                            viewBox: "0 0 24 24",
+                                            fill: "none",
+                                            stroke: "currentColor",
+                                            strokeWidth: "3",
+                                            strokeLinecap: "round",
+                                            strokeLinejoin: "round",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                d: "m18 15-6-6-6 6"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/ThreadCard.tsx",
+                                                lineNumber: 109,
+                                                columnNumber: 172
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/ThreadCard.tsx",
+                                            lineNumber: 109,
+                                            columnNumber: 29
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/ThreadCard.tsx",
+                                        lineNumber: 104,
+                                        columnNumber: 25
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-xs font-black text-metamask-purple",
+                                        children: votes.up - votes.down
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/ThreadCard.tsx",
+                                        lineNumber: 111,
+                                        columnNumber: 25
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: (e)=>handleVote(e, 'down'),
+                                        disabled: isVoting,
+                                        className: "text-metamask-purple/40 hover:text-blue-500 transition-colors",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            width: "18",
+                                            height: "18",
+                                            viewBox: "0 0 24 24",
+                                            fill: "none",
+                                            stroke: "currentColor",
+                                            strokeWidth: "3",
+                                            strokeLinecap: "round",
+                                            strokeLinejoin: "round",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                d: "m6 9 6 6 6-6"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/ThreadCard.tsx",
+                                                lineNumber: 119,
+                                                columnNumber: 172
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/ThreadCard.tsx",
+                                            lineNumber: 119,
+                                            columnNumber: 29
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/ThreadCard.tsx",
+                                        lineNumber: 114,
+                                        columnNumber: 25
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/ThreadCard.tsx",
+                                lineNumber: 103,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/src/components/ThreadCard.tsx",
-                        lineNumber: 70,
+                        lineNumber: 99,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -492,27 +612,27 @@ const ThreadCard = ({ thread, idx })=>{
                                 children: meta.viewsLabel
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 74,
+                                lineNumber: 124,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 children: "•"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 75,
+                                lineNumber: 125,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 children: meta.timeAgo
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 76,
+                                lineNumber: 126,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/ThreadCard.tsx",
-                        lineNumber: 73,
+                        lineNumber: 123,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -520,49 +640,35 @@ const ThreadCard = ({ thread, idx })=>{
                         children: thread.value
                     }, void 0, false, {
                         fileName: "[project]/src/components/ThreadCard.tsx",
-                        lineNumber: 78,
+                        lineNumber: 128,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     tags.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex flex-wrap gap-2",
-                        children: [
-                            tags.slice(0, 3).map((tag)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    onClick: (e)=>{
-                                        e.stopPropagation();
-                                        router.push(`/search?tag=${encodeURIComponent(tag)}`);
-                                    },
-                                    className: "text-[10px] font-black text-metamask-orange bg-metamask-orange/5 px-2 py-0.5 rounded-full hover:bg-metamask-orange hover:text-white transition-colors",
-                                    children: [
-                                        "#",
-                                        tag
-                                    ]
-                                }, tag, true, {
-                                    fileName: "[project]/src/components/ThreadCard.tsx",
-                                    lineNumber: 82,
-                                    columnNumber: 29
-                                }, ("TURBOPACK compile-time value", void 0))),
-                            tags.length > 3 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "text-[10px] font-black text-metamask-purple/40 bg-gray-100 px-2 py-0.5 rounded-full",
+                        children: tags.slice(0, 3).map((tag)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                onClick: (e)=>{
+                                    e.stopPropagation();
+                                    router.push(`/search?tag=${encodeURIComponent(tag)}`);
+                                },
+                                className: "text-[10px] font-black text-metamask-orange bg-metamask-orange/5 px-2 py-0.5 rounded-full hover:bg-metamask-orange hover:text-white transition-colors",
                                 children: [
-                                    "+",
-                                    tags.length - 3,
-                                    " more"
+                                    "#",
+                                    tag
                                 ]
-                            }, void 0, true, {
+                            }, tag, true, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 94,
+                                lineNumber: 132,
                                 columnNumber: 29
-                            }, ("TURBOPACK compile-time value", void 0))
-                        ]
-                    }, void 0, true, {
+                            }, ("TURBOPACK compile-time value", void 0)))
+                    }, void 0, false, {
                         fileName: "[project]/src/components/ThreadCard.tsx",
-                        lineNumber: 80,
+                        lineNumber: 130,
                         columnNumber: 21
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ThreadCard.tsx",
-                lineNumber: 69,
+                lineNumber: 98,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -575,7 +681,7 @@ const ThreadCard = ({ thread, idx })=>{
                                 size: 14
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 104,
+                                lineNumber: 149,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -583,13 +689,13 @@ const ThreadCard = ({ thread, idx })=>{
                                 children: thread.repliesCount || 0
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 105,
+                                lineNumber: 150,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/ThreadCard.tsx",
-                        lineNumber: 103,
+                        lineNumber: 148,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -599,7 +705,7 @@ const ThreadCard = ({ thread, idx })=>{
                                 size: 14
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 108,
+                                lineNumber: 153,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -607,13 +713,13 @@ const ThreadCard = ({ thread, idx })=>{
                                 children: new Date(thread.lastReplyAt || thread.createdAt || Date.now()).toLocaleDateString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 109,
+                                lineNumber: 154,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/ThreadCard.tsx",
-                        lineNumber: 107,
+                        lineNumber: 152,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -623,26 +729,26 @@ const ThreadCard = ({ thread, idx })=>{
                                 size: 12
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ThreadCard.tsx",
-                                lineNumber: 114,
+                                lineNumber: 159,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             tags.length
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/ThreadCard.tsx",
-                        lineNumber: 113,
+                        lineNumber: 158,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ThreadCard.tsx",
-                lineNumber: 102,
+                lineNumber: 147,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/ThreadCard.tsx",
-        lineNumber: 41,
+        lineNumber: 70,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
