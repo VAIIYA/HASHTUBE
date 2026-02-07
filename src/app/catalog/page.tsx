@@ -53,7 +53,7 @@ export default async function CatalogPage() {
                         <Link href="/submit">
                             <Button size="sm" className="gap-2">
                                 <PlusCircle size={16} />
-                                New Thread
+                                Post
                             </Button>
                         </Link>
                         <Link href="/hashtags">
@@ -83,7 +83,7 @@ export default async function CatalogPage() {
                     </Link>
                     <Link href="/submit" className="flex items-center gap-3 text-metamask-purple/80 hover:text-metamask-purple font-bold transition-colors">
                         <PlusCircle size={18} />
-                        New Thread
+                        Post
                     </Link>
                     <div className="pt-6 text-xs font-bold uppercase tracking-widest text-metamask-purple/30">
                         Anonymous Only
