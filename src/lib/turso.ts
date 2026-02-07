@@ -3,7 +3,10 @@ import { createClient } from '@libsql/client';
 const url = process.env.TURSO_DATABASE_URL;
 const authToken = process.env.TURSO_AUTH_TOKEN;
 
-let client: ReturnType<typeof createClient> | null = null;
+type TursoClient = ReturnType<typeof createClient>;
+type TursoExecute = TursoClient['execute'];
+
+let client: TursoClient | null = null;
 
 function getClient() {
     if (client) return client;
@@ -14,9 +17,8 @@ function getClient() {
     return client;
 }
 
-export const turso = {
-    execute: (...args: Parameters<ReturnType<typeof createClient>['execute']>) =>
-        getClient().execute(...args),
+export const turso: { execute: TursoExecute } = {
+    execute: ((...args: Parameters<TursoExecute>) => getClient().execute(...args)) as TursoExecute,
 };
 
 export default turso;
