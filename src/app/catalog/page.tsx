@@ -18,7 +18,7 @@ async function getThreads() {
         `);
         return result.rows as any[];
     } catch (error) {
-        console.error('Error fetching threads:', error);
+        console.error('Error fetching videos:', error);
         return [];
     }
 }
@@ -106,7 +106,7 @@ export default async function CatalogPage() {
                     </div>
 
                     {threads.length === 0 ? (
-                        <div className="text-center py-20 font-bold text-metamask-purple/40">No threads found in the index.</div>
+                        <div className="text-center py-20 font-bold text-metamask-purple/40">No videos found in the index.</div>
                     ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {threads.map((thread, idx) => (

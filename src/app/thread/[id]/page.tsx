@@ -51,7 +51,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                 setReplies(data.replies);
             }
         } catch (error) {
-            console.error('Error fetching thread:', error);
+            console.error('Error fetching video:', error);
         } finally {
             setLoading(false);
         }
@@ -66,7 +66,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                 setUpNext(list.filter((item: Post) => item.id !== id).slice(0, 12));
             }
         } catch (error) {
-            console.error('Error fetching up next:', error);
+            console.error('Error fetching up next videos:', error);
         }
     };
 
@@ -104,7 +104,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
     };
 
     if (loading) return <div className="min-h-screen bg-metamask-beige p-6 flex items-center justify-center">Loading...</div>;
-    if (!op) return <div className="min-h-screen bg-metamask-beige p-6 flex items-center justify-center">Thread not found</div>;
+    if (!op) return <div className="min-h-screen bg-metamask-beige p-6 flex items-center justify-center">Video not found</div>;
 
     let opTags: string[] = [];
     if (op.hashtags) {
@@ -162,7 +162,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                                     </div>
                                     <div className="flex items-center gap-1.5">
                                         <MessageSquare size={12} />
-                                        {op.repliesCount || replies.length} replies
+                                        {op.repliesCount || replies.length} comments
                                     </div>
                                     <div className="flex items-center gap-1.5">
                                         <Play size={12} />
@@ -231,7 +231,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                         <div className="space-y-4">
                             <div className="flex items-center gap-2 text-metamask-purple font-black uppercase tracking-widest text-xs">
                                 <MessageSquare size={14} />
-                                Replies
+                                Comments
                             </div>
 
                             <div className="space-y-4">
@@ -256,7 +256,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                             <form onSubmit={handleReply} className="pt-4 space-y-4">
                                 <div className="relative">
                                     <Input
-                                        placeholder="Type your reply anonymously..."
+                                        placeholder="Type your comment anonymously..."
                                         className="h-16 pr-32"
                                         value={replyText}
                                         onChange={(e) => setReplyText(e.target.value)}
@@ -265,7 +265,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2">
                                         <Button type="submit" disabled={isSubmitting} className="h-10 gap-2">
                                             <MessageSquare size={18} />
-                                            Post Reply
+                                            Post Comment
                                         </Button>
                                     </div>
                                 </div>

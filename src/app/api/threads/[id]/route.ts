@@ -16,7 +16,7 @@ export async function GET(
         const op = opResult.rows[0];
 
         if (!op) {
-            return NextResponse.json({ error: 'Thread not found' }, { status: 404 });
+            return NextResponse.json({ error: 'Video not found' }, { status: 404 });
         }
 
         const repliesResult = await turso.execute({
@@ -26,7 +26,7 @@ export async function GET(
 
         return NextResponse.json({ op, replies: repliesResult.rows });
     } catch (error) {
-        console.error('Fetch thread detail error:', error);
-        return NextResponse.json({ error: 'Failed to fetch thread detail' }, { status: 500 });
+        console.error('Fetch video detail error:', error);
+        return NextResponse.json({ error: 'Failed to fetch video detail' }, { status: 500 });
     }
 }

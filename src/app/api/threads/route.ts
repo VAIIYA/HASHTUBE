@@ -14,7 +14,7 @@ export async function GET() {
 
         return NextResponse.json(result.rows);
     } catch (error) {
-        console.error('Fetch threads error:', error);
-        return NextResponse.json({ error: 'Failed to fetch threads' }, { status: 500 });
+        console.error('Fetch videos error:', error);
+        return NextResponse.json({ error: 'Failed to fetch videos' }, { status: 500 });
     }
 }
