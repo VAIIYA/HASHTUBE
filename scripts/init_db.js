@@ -25,6 +25,8 @@ async function init() {
           lastReplyAt DATETIME DEFAULT CURRENT_TIMESTAMP,
           createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
           updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+          hashtags TEXT,
+          ipns TEXT,
           FOREIGN KEY (parentId) REFERENCES links(id)
       );
     `);

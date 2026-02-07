@@ -2,8 +2,34 @@ import { NextResponse } from 'next/server';
 import turso from '@/lib/turso';
 import crypto from 'crypto';
 
+let schemaReady: Promise<void> | null = null;
+
+async function ensureLinksColumns() {
+    if (!schemaReady) {
+        schemaReady = (async () => {
+            const result = await turso.execute(`PRAGMA table_info(links);`);
+            const existing = new Set((result.rows as any[]).map((row) => row.name));
+
+            const alters: string[] = [];
+            if (!existing.has('hashtags')) {
+                alters.push(`ALTER TABLE links ADD COLUMN hashtags TEXT;`);
+            }
+            if (!existing.has('ipns')) {
+                alters.push(`ALTER TABLE links ADD COLUMN ipns TEXT;`);
+            }
+
+            for (const sql of alters) {
+                await turso.execute(sql);
+            }
+        })();
+    }
+
+    return schemaReady;
+}
+
 export async function POST(request: Request) {
     try {
+        await ensureLinksColumns();
         const body = await request.json();
         const { title, type, value, description, parentId, hashtags, ipns } = body;
 
