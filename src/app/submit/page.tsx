@@ -17,10 +17,12 @@ export default function SubmitPage() {
         ipns: '',
     });
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('loading');
+        setErrorMessage('');
         try {
             const hashtagsArray = formData.hashtags
                 ? formData.hashtags.split(',').map(tag => tag.trim()).filter(tag => tag !== '')
@@ -38,9 +40,22 @@ export default function SubmitPage() {
                 setStatus('success');
                 setTimeout(() => router.push('/'), 2000);
             } else {
+                let message = 'Failed to submit. Please try again.';
+                try {
+                    const data = await res.json();
+                    if (data?.error) {
+                        message = data.error;
+                    } else if (data?.details) {
+                        message = data.details;
+                    }
+                } catch {
+                    // ignore parsing errors
+                }
+                setErrorMessage(message);
                 setStatus('error');
             }
         } catch (error) {
+            setErrorMessage('Failed to submit. Please try again.');
             setStatus('error');
         }
     };
@@ -136,7 +151,7 @@ export default function SubmitPage() {
                         {status === 'error' && (
                             <div className="flex items-center gap-2 text-red-500 bg-red-50 p-4 rounded-2xl text-sm font-bold">
                                 <AlertCircle size={18} />
-                                Failed to submit. Please try again.
+                                {errorMessage || 'Failed to submit. Please try again.'}
                             </div>
                         )}
 
