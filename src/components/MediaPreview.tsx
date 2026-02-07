@@ -25,9 +25,9 @@ export const MediaPreview: React.FC<MediaPreviewProps> = ({
     const [mediaType, setMediaType] = useState<MediaType>(null);
     const [src, setSrc] = useState<string>('');
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { gateway } = useIpfsGateway();
     const valuesKey = (values || []).join('|');
     const gatewayKey = gateway.id;
-    const { gateway } = useIpfsGateway();
 
     useEffect(() => {
         setMediaType(null);
