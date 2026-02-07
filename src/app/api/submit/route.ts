@@ -7,6 +7,32 @@ let schemaReady: Promise<void> | null = null;
 async function ensureLinksColumns() {
     if (!schemaReady) {
         schemaReady = (async () => {
+            // 1. Create the table if it doesn't exist
+            await turso.execute(`
+                CREATE TABLE IF NOT EXISTS links (
+                    id TEXT PRIMARY KEY,
+                    title TEXT NOT NULL,
+                    type TEXT NOT NULL CHECK (type IN ('ipfs')),
+                    value TEXT NOT NULL,
+                    description TEXT,
+                    parentId TEXT,
+                    isOp INTEGER DEFAULT 1,
+                    repliesCount INTEGER DEFAULT 0,
+                    lastReplyAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    hashtags TEXT,
+                    ipns TEXT,
+                    FOREIGN KEY (parentId) REFERENCES links(id)
+                );
+            `);
+
+            // 2. Ensure indices exist
+            await turso.execute(`CREATE INDEX IF NOT EXISTS idx_links_parentId ON links(parentId);`);
+            await turso.execute(`CREATE INDEX IF NOT EXISTS idx_links_lastReplyAt ON links(lastReplyAt DESC);`);
+            await turso.execute(`CREATE INDEX IF NOT EXISTS idx_links_isOp_lastReplyAt ON links(isOp, lastReplyAt DESC);`);
+
+            // 3. Double check columns just in case the table existed but was old
             const result = await turso.execute(`PRAGMA table_info(links);`);
             const existing = new Set((result.rows as any[]).map((row) => row.name));
 
