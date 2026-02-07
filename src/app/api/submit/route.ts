@@ -23,6 +23,8 @@ async function ensureLinksColumns() {
                     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                     hashtags TEXT,
                     ipns TEXT,
+                    upvotes INTEGER DEFAULT 0,
+                    downvotes INTEGER DEFAULT 0,
                     FOREIGN KEY (parentId) REFERENCES links(id)
                 );
             `);
@@ -42,6 +44,12 @@ async function ensureLinksColumns() {
             }
             if (!existing.has('ipns')) {
                 alters.push(`ALTER TABLE links ADD COLUMN ipns TEXT;`);
+            }
+            if (!existing.has('upvotes')) {
+                alters.push(`ALTER TABLE links ADD COLUMN upvotes INTEGER DEFAULT 0;`);
+            }
+            if (!existing.has('downvotes')) {
+                alters.push(`ALTER TABLE links ADD COLUMN downvotes INTEGER DEFAULT 0;`);
             }
 
             for (const sql of alters) {

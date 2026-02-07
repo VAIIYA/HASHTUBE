@@ -35,3 +35,30 @@ It can also happen if the client has a browser extension installed which messes 
                         >
                   ...
 
+[00:07:10.344] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.379] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.400] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.419] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.437] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.456] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.479] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.514] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.533] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.556] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.570] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.590] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.610] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.632] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.645] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.659] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.674] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.689] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.701] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.719] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.735] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.753] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.774] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.785] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.796] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.809] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
+[00:07:10.820] Server  ERROR   Error fetching videos: Error: Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN in environment.
