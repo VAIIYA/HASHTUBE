@@ -2,9 +2,12 @@
 
 import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Search, ArrowLeft, Copy, Download, Hash, ExternalLink, Zap } from 'lucide-react';
+import { Search, ArrowLeft, Copy, Hash, ExternalLink } from 'lucide-react';
 import { Button, Input } from '@/components/ui/shared';
 import { motion } from 'framer-motion';
+import { GatewaySelector } from '@/components/GatewaySelector';
+import { useIpfsGateway } from '@/hooks/useIpfsGateway';
+import { resolveIpfsUrl } from '@/lib/ipfsGateway';
 
 function SearchResultsContent() {
     const searchParams = useSearchParams();
@@ -12,6 +15,7 @@ function SearchResultsContent() {
     const [results, setResults] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
+    const { gateway } = useIpfsGateway();
 
     useEffect(() => {
         const fetchResults = async () => {
@@ -62,6 +66,9 @@ function SearchResultsContent() {
                             }}
                         />
                     </div>
+                    <div className="flex">
+                        <GatewaySelector />
+                    </div>
                 </div>
 
                 {/* Results Info */}
@@ -104,7 +111,7 @@ function SearchResultsContent() {
                                             <Copy size={16} />
                                             Copy
                                         </Button>
-                                        <a href={`https://ipfs.io/ipfs/${item.value}`} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                        <a href={resolveIpfsUrl(item.value, gateway)} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                                             <Button size="sm" className="gap-2">
                                                 <ExternalLink size={16} />
                                                 Open

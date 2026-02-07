@@ -65,7 +65,7 @@ export default function SubmitPage() {
                 </button>
 
                 <div className="space-y-2">
-                    <h1 className="text-4xl font-black text-metamask-purple">Add to HASHCUBE</h1>
+                    <h1 className="text-4xl font-black text-metamask-purple">Add to HASHTUBE</h1>
                     <p className="text-metamask-purple/50 font-medium">Anonymously submit links to the decentralized index.</p>
                 </div>
 
@@ -106,7 +106,7 @@ export default function SubmitPage() {
                                 IPNS (Optional)
                             </label>
                             <Input
-                                placeholder="k51... or https://ipfs.io/ipns/..."
+                                placeholder="k51... or ipns://..."
                                 value={formData.ipns}
                                 onChange={(e) => setFormData({ ...formData, ipns: e.target.value })}
                             />

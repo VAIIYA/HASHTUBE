@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HASHCUBE | Decentralized Index",
+  title: "HASHTUBE | Decentralized Index",
   description: "Anonymous decentralized index for IPFS CIDs and magnet links",
 };
 

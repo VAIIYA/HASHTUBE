@@ -1,31 +1,28 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Play } from 'lucide-react';
 import { useIpfsGateway } from '@/hooks/useIpfsGateway';
 import { resolveIpfsUrl } from '@/lib/ipfsGateway';
 
-interface MediaEmbedProps {
-    values: string[]; // List of CIDs or URLs to try in order
+type MediaType = 'image' | 'video' | 'none' | null;
+
+interface MediaPreviewProps {
+    values: string[];
     className?: string;
     mediaClassName?: string;
-    controls?: boolean;
-    autoPlay?: boolean;
-    muted?: boolean;
-    loop?: boolean;
+    showPlayIcon?: boolean;
     showFallback?: boolean;
 }
 
-export const MediaEmbed: React.FC<MediaEmbedProps> = ({
+export const MediaPreview: React.FC<MediaPreviewProps> = ({
     values,
     className = '',
     mediaClassName = '',
-    controls = true,
-    autoPlay = true,
-    muted = true,
-    loop = true,
-    showFallback = false,
+    showPlayIcon = true,
+    showFallback = true,
 }) => {
-    const [mediaType, setMediaType] = useState<'image' | 'video' | 'unknown' | null>(null);
+    const [mediaType, setMediaType] = useState<MediaType>(null);
     const [src, setSrc] = useState<string>('');
     const [currentIndex, setCurrentIndex] = useState(0);
     const valuesKey = (values || []).join('|');
@@ -40,6 +37,7 @@ export const MediaEmbed: React.FC<MediaEmbedProps> = ({
 
     useEffect(() => {
         if (!values || values.length === 0 || currentIndex >= values.length) {
+            setMediaType('none');
             return;
         }
 
@@ -83,36 +81,49 @@ export const MediaEmbed: React.FC<MediaEmbedProps> = ({
         checkContentType();
     }, [valuesKey, gatewayKey, currentIndex]);
 
-    if (!mediaType || mediaType === 'unknown') {
+    if (mediaType === null && showFallback) {
+        return (
+            <div className={`bg-black/5 animate-pulse ${className}`} />
+        );
+    }
+
+    if (mediaType === 'none') {
         if (!showFallback) return null;
         return (
-            <div className={`rounded-2xl overflow-hidden border border-gray-100 bg-black/5 flex items-center justify-center text-xs font-bold text-metamask-purple/40 ${className}`}>
-                No media found
+            <div className={`bg-black/5 flex items-center justify-center text-xs font-bold text-metamask-purple/40 ${className}`}>
+                No Preview
             </div>
         );
     }
 
     return (
-        <div className={`rounded-2xl overflow-hidden border border-gray-100 bg-black/5 flex justify-center items-center ${className}`}>
+        <div className={`relative overflow-hidden ${className}`}>
             {mediaType === 'image' && (
                 <img
                     src={src}
-                    alt="Embedded content"
-                    className={`w-full h-full object-contain ${mediaClassName}`}
+                    alt="Preview"
+                    className={`w-full h-full object-cover ${mediaClassName}`}
+                    loading="lazy"
                     onError={() => setCurrentIndex(prev => prev + 1)}
                 />
             )}
             {mediaType === 'video' && (
                 <video
                     src={src}
-                    controls={controls}
-                    autoPlay={autoPlay}
-                    muted={muted}
-                    loop={loop}
+                    muted
+                    loop
                     playsInline
-                    className={`w-full h-full ${mediaClassName}`}
+                    preload="metadata"
+                    className={`w-full h-full object-cover ${mediaClassName}`}
                     onError={() => setCurrentIndex(prev => prev + 1)}
                 />
+            )}
+            {showPlayIcon && mediaType === 'video' && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-black/60 flex items-center justify-center">
+                        <Play size={18} className="text-white ml-0.5" />
+                    </div>
+                </div>
             )}
         </div>
     );
