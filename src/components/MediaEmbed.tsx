@@ -28,9 +28,9 @@ export const MediaEmbed: React.FC<MediaEmbedProps> = ({
     const [mediaType, setMediaType] = useState<'image' | 'video' | 'unknown' | null>(null);
     const [src, setSrc] = useState<string>('');
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { gateway } = useIpfsGateway();
     const valuesKey = (values || []).join('|');
     const gatewayKey = gateway.id;
-    const { gateway } = useIpfsGateway();
 
     useEffect(() => {
         setMediaType(null);
