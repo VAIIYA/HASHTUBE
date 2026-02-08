@@ -1,0 +1,18 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/hashtags/route": "app/api/hashtags/route.js",
+  "/api/search/route": "app/api/search/route.js",
+  "/api/submit/route": "app/api/submit/route.js",
+  "/api/threads/[id]/route": "app/api/threads/[id]/route.js",
+  "/api/threads/[id]/vote/route": "app/api/threads/[id]/vote/route.js",
+  "/api/threads/route": "app/api/threads/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/hashtags/page": "app/hashtags/page.js",
+  "/install-ipfs/page": "app/install-ipfs/page.js",
+  "/page": "app/page.js",
+  "/search/page": "app/search/page.js",
+  "/submit/page": "app/submit/page.js",
+  "/thread/[id]/page": "app/thread/[id]/page.js",
+  "/trending/page": "app/trending/page.js"
+}

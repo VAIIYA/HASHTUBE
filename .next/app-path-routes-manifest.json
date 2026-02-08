@@ -1,0 +1,18 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/hashtags/route": "/api/hashtags",
+  "/api/search/route": "/api/search",
+  "/api/submit/route": "/api/submit",
+  "/api/threads/[id]/route": "/api/threads/[id]",
+  "/api/threads/[id]/vote/route": "/api/threads/[id]/vote",
+  "/api/threads/route": "/api/threads",
+  "/favicon.ico/route": "/favicon.ico",
+  "/hashtags/page": "/hashtags",
+  "/install-ipfs/page": "/install-ipfs",
+  "/page": "/",
+  "/search/page": "/search",
+  "/submit/page": "/submit",
+  "/thread/[id]/page": "/thread/[id]",
+  "/trending/page": "/trending"
+}
