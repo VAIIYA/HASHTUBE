@@ -8,23 +8,23 @@ import { GatewaySelector } from '@/components/GatewaySelector';
 
 export const dynamic = 'force-dynamic';
 
-async function getThreads() {
+async function getLatestThreads() {
     try {
         const result = await turso.execute(`
             SELECT * FROM links 
             WHERE isOp = 1 
-            ORDER BY (upvotes - downvotes) DESC, lastReplyAt DESC 
+            ORDER BY createdAt DESC 
             LIMIT 100
         `);
         return result.rows as any[];
     } catch (error) {
-        console.error('Error fetching videos:', error);
+        console.error('Error fetching latest videos:', error);
         return [];
     }
 }
 
-export default async function CatalogPage() {
-    const threads = await getThreads();
+export default async function LatestPage() {
+    const threads = await getLatestThreads();
 
     return (
         <div className="min-h-screen bg-metamask-beige">
@@ -69,11 +69,11 @@ export default async function CatalogPage() {
                         <Home size={18} />
                         Home
                     </Link>
-                    <Link href="/trending" className="flex items-center gap-3 text-metamask-orange font-bold">
+                    <Link href="/trending" className="flex items-center gap-3 text-metamask-purple/80 hover:text-metamask-purple font-bold transition-colors">
                         <Flame size={18} />
                         Trending
                     </Link>
-                    <Link href="/latest" className="flex items-center gap-3 text-metamask-purple/80 hover:text-metamask-purple font-bold transition-colors">
+                    <Link href="/latest" className="flex items-center gap-3 text-metamask-orange font-bold">
                         <Clock size={18} />
                         Latest
                     </Link>
@@ -94,7 +94,7 @@ export default async function CatalogPage() {
                     <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                         <div>
                             <div className="text-xs font-black uppercase tracking-widest text-metamask-purple/40">Global Index</div>
-                            <h1 className="text-3xl md:text-4xl font-black text-metamask-purple tracking-tight">Trending Videos</h1>
+                            <h1 className="text-3xl md:text-4xl font-black text-metamask-purple tracking-tight">Latest Videos</h1>
                         </div>
                         <div className="flex items-center gap-2 text-metamask-purple/40 text-sm font-bold">
                             {threads.length} streams
