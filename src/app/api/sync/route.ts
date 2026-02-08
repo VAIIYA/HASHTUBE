@@ -3,8 +3,33 @@ import turso from '@/lib/turso';
 
 export const dynamic = 'force-dynamic';
 
+async function ensureLinksColumns() {
+    // Check if columns exist
+    const result = await turso.execute(`PRAGMA table_info(links);`);
+    const existing = new Set((result.rows as any[]).map((row) => row.name));
+
+    const alters: string[] = [];
+    if (!existing.has('hashtags')) {
+        alters.push(`ALTER TABLE links ADD COLUMN hashtags TEXT;`);
+    }
+    if (!existing.has('ipns')) {
+        alters.push(`ALTER TABLE links ADD COLUMN ipns TEXT;`);
+    }
+    if (!existing.has('upvotes')) {
+        alters.push(`ALTER TABLE links ADD COLUMN upvotes INTEGER DEFAULT 0;`);
+    }
+    if (!existing.has('downvotes')) {
+        alters.push(`ALTER TABLE links ADD COLUMN downvotes INTEGER DEFAULT 0;`);
+    }
+
+    for (const sql of alters) {
+        await turso.execute(sql);
+    }
+}
+
 export async function POST() {
     try {
+        await ensureLinksColumns();
         // 1. Fetch threads from HASHCUBE
         const response = await fetch('https://hashcube.vercel.app/api/threads');
         if (!response.ok) {
