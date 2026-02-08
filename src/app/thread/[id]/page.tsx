@@ -337,7 +337,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                                                         {nextMeta.viewsLabel}
                                                     </div>
                                                     <div className="text-[10px] text-metamask-purple/40 font-bold uppercase">
-                                                        {nextMeta.durationLabel} • {nextMeta.timeAgo}
+                                                        {nextMeta.timeAgo}
                                                     </div>
                                                 </div>
                                             </>

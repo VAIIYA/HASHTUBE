@@ -80,9 +80,6 @@ export const ThreadCard: React.FC<ThreadCardProps> = ({ thread, idx }) => {
                     className="aspect-video rounded-2xl bg-black/5"
                     showPlayIcon
                 />
-                <div className="absolute bottom-3 right-3 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded">
-                    {meta.durationLabel}
-                </div>
                 <div className="absolute top-3 right-3 flex flex-col gap-1 items-end">
                     <span className="text-[10px] font-black bg-white/90 px-2 py-1 rounded text-metamask-purple/60 uppercase">
                         {thread.type}
