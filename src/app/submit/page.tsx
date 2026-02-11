@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { Button, Input, Textarea } from '@/components/ui/shared';
 import { motion } from 'framer-motion';
+import { TagInput } from '@/components/TagInput';
 
 export default function SubmitPage() {
     const router = useRouter();
@@ -13,28 +14,55 @@ export default function SubmitPage() {
         type: 'ipfs',
         value: '',
         description: '',
-        hashtags: '',
+        hashtags: [] as string[],
         ipns: '',
     });
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [isFetchingMetadata, setIsFetchingMetadata] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
+
+    // Detect X.com links and fetch metadata
+    useEffect(() => {
+        const isXLink = formData.value.match(/^https?:\/\/(x|twitter)\.com\/\w+\/status\/\d+/);
+        if (isXLink && !isFetchingMetadata) {
+            handleFetchXMetadata(formData.value);
+        }
+    }, [formData.value]);
+
+    const handleFetchXMetadata = async (url: string) => {
+        setIsFetchingMetadata(true);
+        try {
+            const res = await fetch('/api/fetch-x-metadata', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url }),
+            });
+            if (res.ok) {
+                const data = await res.json();
+                if (data.text) {
+                    setFormData(prev => ({
+                        ...prev,
+                        description: data.text,
+                        title: prev.title || (data.text.slice(0, 50) + (data.text.length > 50 ? '...' : ''))
+                    }));
+                }
+            }
+        } catch (error) {
+            console.error('Failed to fetch X metadata:', error);
+        } finally {
+            setIsFetchingMetadata(false);
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('loading');
         setErrorMessage('');
         try {
-            const hashtagsArray = formData.hashtags
-                ? formData.hashtags.split(',').map(tag => tag.trim()).filter(tag => tag !== '')
-                : [];
-
             const res = await fetch('/api/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    ...formData,
-                    hashtags: hashtagsArray,
-                }),
+                body: JSON.stringify(formData),
             });
             if (res.ok) {
                 setStatus('success');
@@ -105,12 +133,20 @@ export default function SubmitPage() {
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-black uppercase tracking-wider text-metamask-purple/40 ml-4">
-                                IPFS CONTENT HASH CID
-                            </label>
+                            <div className="flex justify-between items-center mb-1">
+                                <label className="text-sm font-black uppercase tracking-wider text-metamask-purple/40 ml-4">
+                                    CONTENT URL / CID
+                                </label>
+                                {isFetchingMetadata && (
+                                    <div className="flex items-center gap-2 text-[10px] font-bold text-metamask-orange animate-pulse px-4">
+                                        <Loader2 size={12} className="animate-spin" />
+                                        FETCHING METADATA...
+                                    </div>
+                                )}
+                            </div>
                             <Input
                                 required
-                                placeholder="Qm... or bafy..."
+                                placeholder="Qm... or https://x.com/..."
                                 value={formData.value}
                                 onChange={(e) => setFormData({ ...formData, value: e.target.value })}
                             />
@@ -129,14 +165,13 @@ export default function SubmitPage() {
 
                         <div className="space-y-2">
                             <label className="text-sm font-black uppercase tracking-wider text-metamask-purple/40 ml-4">
-                                Hashtags (Optional, max 3)
+                                Hashtags (Optional)
                             </label>
-                            <Input
+                            <TagInput
+                                tags={formData.hashtags}
+                                onTagsChange={(tags) => setFormData({ ...formData, hashtags: tags })}
                                 placeholder="e.g. movies, opensource, docs"
-                                value={formData.hashtags}
-                                onChange={(e) => setFormData({ ...formData, hashtags: e.target.value })}
                             />
-                            <p className="text-[10px] text-metamask-purple/30 ml-4 italic">Separate hashtags with commas.</p>
                         </div>
 
                         <div className="space-y-2">
@@ -158,7 +193,7 @@ export default function SubmitPage() {
                         <Button
                             type="submit"
                             className="w-full gap-2 h-14"
-                            disabled={status === 'loading'}
+                            disabled={status === 'loading' || isFetchingMetadata}
                         >
                             <Send size={20} />
                             {status === 'loading' ? 'Processing...' : 'Submit Anonymously'}

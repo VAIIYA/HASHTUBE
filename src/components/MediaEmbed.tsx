@@ -49,6 +49,17 @@ export const MediaEmbed: React.FC<MediaEmbedProps> = ({
             return;
         }
 
+        // Special handling for X.com / Twitter links
+        const xMatch = value.match(/^https?:\/\/(x|twitter)\.com\/\w+\/status\/(\d+)/);
+        if (xMatch) {
+            const tweetId = xMatch[2];
+            // Use fxtwitter for embedding - it provides a clean video player via its /i/status/ID/video endpoint or similar
+            // However, a simple way is to use an iframe to fxtwitter
+            setSrc(`https://fxtwitter.com/i/status/${tweetId}`);
+            setMediaType('x-video' as any);
+            return;
+        }
+
         const gatewayUrl = resolveIpfsUrl(value, gateway);
 
         const checkContentType = async () => {
@@ -112,6 +123,14 @@ export const MediaEmbed: React.FC<MediaEmbedProps> = ({
                     playsInline
                     className={`w-full h-full ${mediaClassName}`}
                     onError={() => setCurrentIndex(prev => prev + 1)}
+                />
+            )}
+            {(mediaType as string) === 'x-video' && (
+                <iframe
+                    src={src.replace('fxtwitter.com', 'fxtwitter.com')} // Already set above
+                    className={`w-full aspect-video border-none ${mediaClassName}`}
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowFullScreen
                 />
             )}
         </div>

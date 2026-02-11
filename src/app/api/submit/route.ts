@@ -12,7 +12,7 @@ async function ensureLinksColumns() {
                 CREATE TABLE IF NOT EXISTS links (
                     id TEXT PRIMARY KEY,
                     title TEXT NOT NULL,
-                    type TEXT NOT NULL CHECK (type IN ('ipfs')),
+                    type TEXT NOT NULL CHECK (type IN ('ipfs', 'x', 'url')),
                     value TEXT NOT NULL,
                     description TEXT,
                     parentId TEXT,
@@ -34,7 +34,10 @@ async function ensureLinksColumns() {
             await turso.execute(`CREATE INDEX IF NOT EXISTS idx_links_lastReplyAt ON links(lastReplyAt DESC);`);
             await turso.execute(`CREATE INDEX IF NOT EXISTS idx_links_isOp_lastReplyAt ON links(isOp, lastReplyAt DESC);`);
 
-            // 3. Double check columns just in case the table existed but was old
+            // 3. Double check columns and constraints
+            // SQLite doesn't support easy ALTER TABLE to change CHECK constraints.
+            // For now we'll assume the table is created correctly or manually migrated if needed.
+            // But we can check if it needs columns.
             const result = await turso.execute(`PRAGMA table_info(links);`);
             const existing = new Set((result.rows as any[]).map((row) => row.name));
 
@@ -68,14 +71,24 @@ export async function POST(request: Request) {
         const { title, type, value, description, parentId, hashtags, ipns } = body;
 
         const id = crypto.randomUUID();
-        const linkType = 'ipfs'; // Enforce ipfs
+        let linkType = type || 'ipfs';
+
+        // Auto-detect X link
+        if (value && value.match(/^https?:\/\/(x|twitter)\.com\/\w+\/status\/\d+/)) {
+            linkType = 'x';
+        } else if (value && value.startsWith('http')) {
+            linkType = 'url';
+        } else {
+            linkType = 'ipfs';
+        }
+
         const now = new Date().toISOString();
 
         // Process hashtags: max 3, sanitized
         let processedHashtags = null;
         if (Array.isArray(hashtags) && hashtags.length > 0) {
             processedHashtags = JSON.stringify(
-                hashtags.slice(0, 3).map((tag: string) => tag.trim().replace(/^#/, '').toLowerCase())
+                hashtags.slice(0, 3).map((tag: string) => tag.trim().toLowerCase().replace(/^#/, ''))
             );
         }
 
